@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="header.png" />
+    <title>Demir Kapı Dergisi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Temel Stil Sıfırlama ve Genel Ayarlar */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: #d32f2f;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #9a0007;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Header Styles - GÜNCELLENDİ */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        transition: all 0.3s ease;
+      }
+
+      /* Başlangıçta şeffaf navbar */
+      header.transparent {
+        background-color: transparent;
+        box-shadow: none;
+      }
+
+      /* Scroll yapınca görünen navbar */
+      header.solid {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        position: relative;
+      }
+
+      .logo {
+        z-index: 101;
+        flex: 1;
+      }
+
+      .logo img {
+        height: 50px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        flex: 2;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        position: relative;
+        z-index: 102;
+        transition: all 0.3s ease;
+        margin: 0;
+        gap: 25px;
+      }
+
+      .nav-menu li {
+        opacity: 1;
+        transform: translateX(0);
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu a {
+        font-weight: 600;
+        padding: 5px 2px;
+        position: relative;
+        display: inline-block;
+        color: #333;
+        font-size: 1.1rem;
+      }
+
+      /* Başlangıçta menü öğeleri beyaz (şeffaf arka plan için) */
+      header.transparent .nav-menu a {
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Yeni eklendi: Alt çizgi efekti */
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 50%;
+        background-color: #d32f2f;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .nav-menu a:hover {
+        color: #d32f2f;
+      }
+
+      header.transparent .nav-menu a:hover {
+        color: #fff;
+      }
+
+      header.transparent .mobile-menu-btn {
+        color: white;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 103;
+        color: #333;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("ATAM.gif") center/cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 120px 20px;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin: 0 auto 30px;
+        max-width: 700px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: #d32f2f;
+        color: white;
+        padding: 14px 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+        border: 2px solid #d32f2f;
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: white;
+        border-color: white;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid white;
+        margin-left: 15px;
+      }
+
+      .btn-outline:hover {
+        background-color: white;
+        color: #d32f2f;
+      }
+
+      /* Makale Grid */
+      .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+        font-size: 2.2rem;
+        color: #333;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background-color: #d32f2f;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .filter-btn {
+        background: #f1f1f1;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 500;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #d32f2f;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .article-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .article-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .article-img {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .article-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .article-card:hover .article-img img {
+        transform: scale(1.1);
+      }
+
+      .article-category {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #d32f2f;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        z-index: 2;
+      }
+
+      .article-content {
+        padding: 25px;
+      }
+
+      .article-content h3 {
+        margin-bottom: 12px;
+        font-size: 1.4rem;
+        line-height: 1.4;
+      }
+
+      .article-content h3 a {
+        color: #333;
+        transition: color 0.3s;
+      }
+
+      .article-content h3 a:hover {
+        color: #d32f2f;
+      }
+
+      .article-meta {
+        color: #777;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .article-meta span {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+      }
+
+      .article-meta i {
+        margin-right: 5px;
+      }
+
+      .read-time {
+        background: #f5f5f5;
+        padding: 3px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+      }
+
+      /* Kategori Bölümü */
+      .categories {
+        background-color: #fff;
+        padding: 70px 0;
+        margin-bottom: 50px;
+      }
+
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+      }
+
+      .category-card {
+        background-color: #f8f9fa;
+        padding: 35px 20px;
+        text-align: center;
+        border-radius: 10px;
+        transition: all 0.3s;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .category-card:hover {
+        background-color: #d32f2f;
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      .category-card:hover a {
+        color: white;
+      }
+
+      .category-card i {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: #d32f2f;
+        transition: all 0.3s;
+      }
+
+      .category-card:hover i {
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .category-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      /* Abonelik Bölümü */
+      .newsletter {
+        background-color: #d32f2f;
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .newsletter::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0) 60%
+        );
+        transform: rotate(30deg);
+      }
+
+      .newsletter h2 {
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .newsletter p {
+        max-width: 600px;
+        margin: 0 auto 30px;
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .subscribe-form {
+        display: flex;
+        max-width: 500px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .subscribe-form input {
+        flex: 1;
+        padding: 16px 20px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        font-size: 1rem;
+      }
+
+      .subscribe-form button {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 0 25px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+
+      .subscribe-form button:hover {
+        background: #111;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #222;
+        color: #fff;
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column {
+        text-align: center; /* Tüm içeriği ortala */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* İçerikleri yatayda ortala */
+      }
+
+      .footer-column h3 {
+        color: #d32f2f;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        width: 100%; /* Başlığın tam genişlikte olmasını sağla */
+      }
+
+      .footer-column p {
+        color: #ccc;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        width: 100%; /* Paragrafın tam genişlikte olmasını sağla */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%; /* Listenin tam genişlikte olmasını sağla */
+      }
+
+      .footer-column ul li {
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: center; /* Liste öğelerini ortala */
+      }
+
+      .footer-column ul li a {
+        color: #ccc;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .footer-column ul li a:hover {
+        color: #fff;
+        transform: translateX(5px);
+      }
+
+      .footer-column ul li i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center; /* Sosyal medya ikonlarını ortala */
+      }
+
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #333;
+        color: #ccc;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .social-links a:hover {
+        background: #d32f2f;
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #ccc;
+        font-size: 0.9rem;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #d32f2f;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 99;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background: #9a0007;
+        transform: translateY(-5px);
+      }
+
+      /* Responsive Tasarım */
+      @media (max-width: 992px) {
+        .articles-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .categories-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          position: fixed;
+          top: 80px;
+          left: -100%;
+          background: white;
+          width: 80%;
+          height: calc(100vh - 80px);
+          flex-direction: column;
+          padding: 40px 20px;
+          box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+          transition: 0.3s;
+          gap: 0;
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .nav-menu li {
+          margin: 15px 0;
+          opacity: 1;
+          transform: translateX(0);
+          width: 100%;
+        }
+
+        .nav-menu a {
+          display: block;
+          padding: 10px 0;
+          font-size: 1.2rem;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .header-container {
+          padding: 15px 0;
+        }
+
+        .hero {
+          padding: 100px 20px;
+          margin-top: 60px; /* Header yüksekliği kadar margin ekle */
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .subscribe-form {
+          flex-direction: column;
+        }
+
+        .subscribe-form input {
+          border-radius: 5px;
+          margin-bottom: 10px;
+        }
+
+        .subscribe-form button {
+          border-radius: 5px;
+          padding: 15px;
+        }
+
+        .btn-container {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .btn {
+          margin: 0 !important;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .articles-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .categories-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .filter-buttons {
+          gap: 5px;
+        }
+
+        .filter-btn {
+          padding: 8px 12px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="main-header" class="transparent">
+      <div class="container header-container">
+        <div class="nav-container">
+          <ul class="nav-menu">
+            <li><a href="makaleler.html">Makaleler</a></li>
+            <li><a href="yazarlar.html">Yazarlar</a></li>
+          </ul>
+        </div>
+
+        <div class="logo">
+          <a href="index.html"
+            ><img src="logo.png" alt="Demir Kapı Dergisi"
+          /></a>
+        </div>
+
+        <div class="nav-container">
+          <ul class="nav-menu">
+            <li><a href="about.html">Hakkımızda</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>TÜRK GENÇLİĞİ'nin Dergisi</h1>
+        <p>
+          DEMİR KAPI ile gündemi takip edin, dünyaya farklı bir pencereden
+          bakın. Kaliteli içerik ve derin analizlerle aydınlanın.
+        </p>
+        <div class="btn-container">
+          <a
+            href="https://drive.google.com/file/d/1txKnrgLrwnWoj11R6Escvd9KeOXnjzls/view"
+            class="btn"
+            >Son Sayıyı İncele</a
+          >
+          <a href="#newsletter" class="btn btn-outline">Abone Ol</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Son Makaleler -->
+    <section class="container">
+      <h2 class="section-title">Son Makaleler</h2>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="bilim-teknoloji">
+          Bilim ve Teknoloji
+        </button>
+        <button class="filter-btn" data-filter="kultur-sanat">
+          Kültür ve Sanat
+        </button>
+        <button class="filter-btn" data-filter="tarih">Tarih</button>
+        <button class="filter-btn" data-filter="felsefe">Felsefe</button>
+        <button class="filter-btn" data-filter="insan-haklari">
+          İnsan Hakları
+        </button>
+        <button class="filter-btn" data-filter="siyaset-medya">
+          Siyaset ve Medya
+        </button>
+      </div>
+
+      <div class="articles-grid">
+        <!-- Makale 1 -->
+        <div class="article-card" data-category="bilim-teknoloji">
+          <div class="article-img">
+            <img src="dergi.png" alt="Demir Kapı Dergisi 2. Sayı" />
+            <div class="article-category">Bilim & Teknoloji</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Demir Kapı Dergisi 2. Sayı</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 9 Ağustos 2025</span>
+              <span class="read-time"><i class="far fa-clock"></i> 5 dk</span>
+            </div>
+            <p>
+              Genç Türkler Hareketi olarak hazırladığımız dergimize tıklayarak
+              ulaşabilirsiniz. Yeni sayımızda birbirinden değerli içeriklerle
+              karşınızdayız.
+            </p>
+          </div>
+        </div>
+
+        <!-- Makale 2 -->
+        <div class="article-card" data-category="kultur-sanat">
+          <div class="article-img">
+            <img
+              src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              alt="Sürdürülebilir Moda ve Geleceği"
+            />
+            <div class="article-category">Kültür & Sanat</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Sürdürülebilir Moda ve Geleceği</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 10 Eylül 2023</span>
+              <span class="read-time"><i class="far fa-clock"></i> 7 dk</span>
+            </div>
+            <p>
+              Moda endüstrisinde sürdürülebilirlik trendleri ve çevre dostu moda
+              markalarının yükselişi hakkında kapsamlı bir analiz.
+            </p>
+          </div>
+        </div>
+
+        <!-- Makale 3 -->
+        <div class="article-card" data-category="tarih">
+          <div class="article-img">
+            <img
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              alt="Doğa Fotoğrafçılığı İpuçları"
+            />
+            <div class="article-category">Tarih</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Doğa Fotoğrafçılığı İpuçları</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 5 Eylül 2023</span>
+              <span class="read-time"><i class="far fa-clock"></i> 4 dk</span>
+            </div>
+            <p>
+              Muhteşem doğa fotoğrafları çekmek isteyenler için uzmanlardan
+              ipuçları ve teknikler. Doğayla iç içe harika kareler yakalayın.
+            </p>
+          </div>
+        </div>
+
+        <!-- Makale 4 -->
+        <div class="article-card" data-category="felsefe">
+          <div class="article-img">
+            <img
+              src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              alt="Varoluşçuluk ve Modern İnsan"
+            />
+            <div class="article-category">Felsefe</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Varoluşçuluk ve Modern İnsan</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 3 Eylül 2023</span>
+              <span class="read-time"><i class="far fa-clock"></i> 9 dk</span>
+            </div>
+            <p>
+              Varoluşçu felsefenin günümüz dünyasında bireyin anlam arayışına
+              etkileri üzerine derinlemesine bir inceleme.
+            </p>
+          </div>
+        </div>
+
+        <!-- Makale 5 -->
+        <div class="article-card" data-category="insan-haklari">
+          <div class="article-img">
+            <img
+              src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              alt="Dijital Çağda İfade Özgürlüğü"
+            />
+            <div class="article-category">İnsan Hakları</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Dijital Çağda İfade Özgürlüğü</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 1 Eylül 2023</span>
+              <span class="read-time"><i class="far fa-clock"></i> 6 dk</span>
+            </div>
+            <p>
+              Sosyal medya platformlarının yükselişiyle ifade özgürlüğünün
+              dönüşümü ve modern toplumdaki yeri üzerine kritik bir analiz.
+            </p>
+          </div>
+        </div>
+
+        <!-- Makale 6 -->
+        <div class="article-card" data-category="siyaset-medya">
+          <div class="article-img">
+            <img
+              src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+              alt="Medya ve Siyaset İlişkisi"
+            />
+            <div class="article-category">Siyaset & Medya</div>
+          </div>
+          <div class="article-content">
+            <h3><a href="#">Medya ve Siyaset İlişkisi</a></h3>
+            <div class="article-meta">
+              <span><i class="far fa-calendar"></i> 28 Ağustos 2023</span>
+              <span class="read-time"><i class="far fa-clock"></i> 8 dk</span>
+            </div>
+            <p>
+              Medyanın siyasi süreçlere etkisi ve modern demokrasilerde haber
+              alma özgürlüğünün önemi üzerine kapsamlı bir değerlendirme.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori Bölümü -->
+    <section class="categories">
+      <div class="container">
+        <h2 class="section-title">Kategoriler</h2>
+        <div class="categories-grid">
+          <div class="category-card" data-filter="bilim-teknoloji">
+            <i class="fas fa-microchip"></i>
+            <h3>Bilim & Teknoloji</h3>
+            <a href="#">25 Makale</a>
+          </div>
+
+          <div class="category-card" data-filter="kultur-sanat">
+            <i class="fas fa-paint-brush"></i>
+            <h3>Kültür & Sanat</h3>
+            <a href="#">18 Makale</a>
+          </div>
+
+          <div class="category-card" data-filter="tarih">
+            <i class="fas fa-landmark"></i>
+            <h3>Tarih</h3>
+            <a href="#">32 Makale</a>
+          </div>
+
+          <div class="category-card" data-filter="felsefe">
+            <i class="fas fa-brain"></i>
+            <h3>Felsefe</h3>
+            <a href="#">15 Makale</a>
+          </div>
+
+          <div class="category-card" data-filter="insan-haklari">
+            <i class="fas fa-balance-scale"></i>
+            <h3>İnsan Hakları</h3>
+            <a href="#">12 Makale</a>
+          </div>
+
+          <div class="category-card" data-filter="siyaset-medya">
+            <i class="fas fa-newspaper"></i>
+            <h3>Siyaset & Medya</h3>
+            <a href="#">22 Makale</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Abonelik -->
+    <section class="newsletter" id="newsletter">
+      <div class="container">
+        <h2>Bültenimize Abone Olun</h2>
+        <p>
+          En güncel içeriklerimizden haberdar olmak için e-posta bültenimize
+          abone olun. Hiçbir zaman spam göndermiyoruz!
+        </p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="E-posta adresiniz" required />
+          <button type="submit">Abone Ol</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Hızlı Erişim</h3>
+            <ul>
+              <li>
+                <a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a>
+              </li>
+              <li>
+                <a href="makaleler.html"
+                  ><i class="fas fa-newspaper"></i> Makaleler</a
+                >
+              </li>
+              <li>
+                <a href="yazarlar.html"><i class="fas fa-list"></i> Yazarlar</a>
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="fas fa-info-circle"></i> Hakkımızda</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-envelope"></i> İletişim</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Demir Kapı Dergisi</h3>
+            <p>
+              Türk gençliğinin düşünce dergisi. Kaliteli içerik ve derin
+              analizlerle Türk milletine hizmet.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.linkedin.com/company/demir-kapı-dergisi/"
+                target="_blank"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="https://x.com/DemirKapiDer" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/demirkapidergisi/"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.youtube.com/@gencgth" target="_blank"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a href="https://www.tiktok.com/@gencgth_81" target="_blank"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>İletişim</h3>
+            <ul>
+              <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+              <li><i class="fas fa-phone"></i> +90 XXX XXX XX XX</li>
+              <li><i class="fas fa-envelope"></i> info@demirkapi.com</li>
+              <li><i class="fas fa-clock"></i>TÜRK uyumaz</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://www.linkedin.com/in/emekhsıldır/"
+            ><p>&copy; 2025 Demir Kapı Dergisi. Tüm hakları saklıdır.</p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+      // Scroll ile navbar rengini değiştirme
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("main-header");
+        if (window.scrollY > 50) {
+          header.classList.remove("transparent");
+          header.classList.add("solid");
+        } else {
+          header.classList.remove("solid");
+          header.classList.add("transparent");
+        }
+      });
+
+      // Mobil menü işlevselliği
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-menu").classList.toggle("active");
+          this.querySelector("i").classList.toggle("fa-bars");
+          this.querySelector("i").classList.toggle("fa-times");
+        });
+
+      // Kategori filtreleme işlevselliği
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const categoryCards = document.querySelectorAll(".category-card");
+        const articles = document.querySelectorAll(".article-card");
+
+        // Filtre butonları için event listener
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const filter = button.getAttribute("data-filter");
+
+            // Tüm butonlardan active classını kaldır
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            // Tıklanan butona active classını ekle
+            button.classList.add("active");
+
+            // Makaleleri filtrele
+            filterArticles(filter);
+          });
+        });
+
+        // Kategori kartları için event listener
+        categoryCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            const filter = card.getAttribute("data-filter");
+
+            // Tüm butonlardan active classını kaldır
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            // İlgili butona active classını ekle
+            document
+              .querySelector(`.filter-btn[data-filter="${filter}"]`)
+              .classList.add("active");
+
+            // Makaleleri filtrele
+            filterArticles(filter);
+
+            // Sayfayı makaleler bölümüne kaydır
+            document.querySelector(".section-title").scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+
+        // Makale filtreleme fonksiyonu
+        function filterArticles(filter) {
+          articles.forEach((article) => {
+            if (filter === "all") {
+              article.style.display = "block";
+            } else {
+              if (article.getAttribute("data-category") === filter) {
+                article.style.display = "block";
+              } else {
+                article.style.display = "none";
+              }
+            }
+          });
+        }
+
+        // Back to top butonu
+        const backToTopButton = document.querySelector(".back-to-top");
+
+        window.addEventListener("scroll", () => {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add("visible");
+          } else {
+            backToTopButton.classList.remove("visible");
+          }
+        });
+
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
