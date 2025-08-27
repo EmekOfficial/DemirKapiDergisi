@@ -9,6 +9,6 @@ Bu proje, Demir Kapı Dergisi için responsive olarak geliştirilmiştir. Modern
 ## 📋 Yapılacaklar Listesi
 
 - ✅ Proje iskeletinin oluşturulması
-- ⚪ Kategorili makaleler,hakkımızda ve iletişim sayfası
+- ✅ Kategorili makaleler,hakkımızda ve iletişim sayfası
 - ⚪ Abonelik sistemi
-- ❔Yazarlar sayfası eklenebilir
+- ✅ Yazarlar sayfası eklenebilir
