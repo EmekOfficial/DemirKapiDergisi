@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="header.png" />
+    <title>Hakkımızda - Demir Kapı Dergisi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Ana sayfadaki tüm stilleri buraya taşıdım */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: #d32f2f;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #9a0007;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Header Styles */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        transition: all 0.3s ease;
+      }
+
+      header.transparent {
+        background-color: transparent;
+        box-shadow: none;
+      }
+
+      header.solid {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        position: relative;
+      }
+
+      .logo {
+        z-index: 101;
+        flex: 1;
+      }
+
+      .logo img {
+        height: 50px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: center;
+        flex: 2;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        position: relative;
+        z-index: 102;
+        transition: all 0.3s ease;
+        margin: 0;
+        gap: 25px;
+      }
+
+      .nav-menu li {
+        opacity: 1;
+        transform: translateX(0);
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu a {
+        font-weight: 600;
+        padding: 5px 2px;
+        position: relative;
+        display: inline-block;
+        color: #333;
+        font-size: 1.1rem;
+      }
+
+      header.transparent .nav-menu a {
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 50%;
+        background-color: #d32f2f;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .nav-menu a:hover {
+        color: #d32f2f;
+      }
+
+      header.transparent .nav-menu a:hover {
+        color: #fff;
+      }
+
+      header.transparent .mobile-menu-btn {
+        color: white;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 103;
+        color: #333;
+      }
+
+      /* Hero Section for About Page */
+      .about-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("ATAM.gif") center/cover no-repeat;
+        color: white;
+        text-align: center;
+        padding: 150px 20px 80px;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .about-hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .about-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .about-hero p {
+        font-size: 1.3rem;
+        margin: 0 auto 30px;
+        max-width: 700px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* About Content Sections */
+      .about-section {
+        padding: 60px 0;
+      }
+
+      .about-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 60px;
+      }
+
+      .about-text {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .about-image {
+        flex: 1;
+        min-width: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.5s;
+      }
+
+      .about-image:hover img {
+        transform: scale(1.05);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+        font-size: 2.2rem;
+        color: #333;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background-color: #d32f2f;
+      }
+
+      /* Values Section */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .value-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+      }
+
+      .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .value-card i {
+        font-size: 3rem;
+        color: #d32f2f;
+        margin-bottom: 20px;
+      }
+
+      .value-card h3 {
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      /* Team Section */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .team-member {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        text-align: center;
+      }
+
+      .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .team-img {
+        height: 250px;
+        overflow: hidden;
+      }
+
+      .team-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .team-member:hover .team-img img {
+        transform: scale(1.1);
+      }
+
+      .team-info {
+        padding: 25px;
+      }
+
+      .team-info h3 {
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .team-role {
+        color: #d32f2f;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .team-social {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .team-social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #f5f5f5;
+        color: #333;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .team-social a:hover {
+        background: #d32f2f;
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* Timeline Section */
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: #d32f2f;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+      }
+
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        margin-bottom: 50px;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        padding-right: 40px;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+        padding-left: 40px;
+      }
+
+      .timeline-content {
+        position: relative;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .timeline-content::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        top: 20px;
+        transform: rotate(45deg);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content::after {
+        right: -10px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -10px;
+      }
+
+      .timeline-date {
+        font-weight: bold;
+        color: #d32f2f;
+        margin-bottom: 10px;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background-color: #d32f2f;
+        color: white;
+        text-align: center;
+        padding: 80px 0;
+        margin: 60px 0;
+        border-radius: 10px;
+      }
+
+      .cta-section h2 {
+        margin-bottom: 20px;
+        font-size: 2.2rem;
+      }
+
+      .cta-section p {
+        max-width: 600px;
+        margin: 0 auto 30px;
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: white;
+        color: #d32f2f;
+        padding: 14px 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+        border: 2px solid white;
+        margin: 0 10px;
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: white;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn-outline:hover {
+        background-color: white;
+        color: #d32f2f;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #222;
+        color: #fff;
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-column h3 {
+        color: #d32f2f;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        width: 100%;
+      }
+
+      .footer-column p {
+        color: #ccc;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .footer-column ul li a {
+        color: #ccc;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .footer-column ul li a:hover {
+        color: #fff;
+        transform: translateX(5px);
+      }
+
+      .footer-column ul li i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #333;
+        color: #ccc;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .social-links a:hover {
+        background: #d32f2f;
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #ccc;
+        font-size: 0.9rem;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #d32f2f;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 99;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background: #9a0007;
+        transform: translateY(-5px);
+      }
+
+      /* Responsive Tasarım */
+      @media (max-width: 992px) {
+        .values-grid,
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .about-hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .about-hero p {
+          font-size: 1.1rem;
+        }
+        
+        .timeline::after {
+          left: 31px;
+        }
+        
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 25px;
+        }
+        
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+        
+        .timeline-content::after {
+          left: 15px;
+          right: auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          position: fixed;
+          top: 80px;
+          left: -100%;
+          background: white;
+          width: 80%;
+          height: calc(100vh - 80px);
+          flex-direction: column;
+          padding: 40px 20px;
+          box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+          transition: 0.3s;
+          gap: 0;
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .nav-menu li {
+          margin: 15px 0;
+          opacity: 1;
+          transform: translateX(0);
+          width: 100%;
+        }
+
+        .nav-menu a {
+          display: block;
+          padding: 10px 0;
+          font-size: 1.2rem;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .header-container {
+          padding: 15px 0;
+        }
+
+        .about-hero {
+          padding: 120px 20px 60px;
+          margin-top: 60px;
+        }
+
+        .about-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .btn-container {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .btn {
+          margin: 0 !important;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .values-grid,
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+        }
+
+        .about-hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .about-hero p {
+          font-size: 1rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+        
+        .about-container {
+          flex-direction: column;
+        }
+      }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="transparent">
+      <div class="container header-container">
+        <div class="nav-container">
+          <ul class="nav-menu">
+            <li><a href="makaleler.html">Makaleler</a></li>
+            <li><a href="yazarlar.html">Yazarlar</a></li>
+          </ul>
+        </div>
+
+        <div class="logo">
+          <a href="index.html"
+            ><img src="logo.png" alt="Demir Kapı Dergisi"
+          /></a>
+        </div>
+
+        <div class="nav-container">
+          <ul class="nav-menu">
+            <li><a href="about.html">Hakkımızda</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="container about-hero-content">
+        <h1>Demir Kapı Dergisi Hakkında</h1>
+        <p>
+          Türk gençliğinin düşünce dünyasına katkı sağlamak için yola çıktık.
+          İşte hikayemiz, değerlerimiz ve ekibimiz.
+        </p>
+      </div>
+    </section>
+
+    <!-- Hikayemiz Section -->
+    <section class="container about-section">
+      <h2 class="section-title">Hikayemiz</h2>
+      <div class="about-container">
+        <div class="about-text">
+          <p>
+            Demir Kapı Dergisi, 2023 yılında Türk gençliğinin düşünce dünyasına katkı sağlamak amacıyla kuruldu. 
+            Adını, Türk milletinin tarih boyunca karşılaştığı zorlukları aşma azminden ve gücünden alan dergimiz, 
+            gençlerin ufkunu açacak nitelikli içerikler üretmeyi hedeflemektedir.
+          </p>
+          <p>
+            Kuruluşumuzdan bu yana, bilimden sanata, tarihten felsefeye kadar geniş bir yelpazede 
+            makaleler yayınlayarak okuyucularımıza kaliteli bir okuma deneyimi sunmayı amaçladık. 
+            Amacımız, Türk gençliğinin düşünce dünyasını zenginleştirmek ve onlara yeni ufuklar açmaktır.
+          </p>
+          <p>
+            Dergimiz, Genç Türkler Hareketi'nin bir yayın organı olarak, Türk milletinin değerlerine 
+            bağlı, aydın, üretken ve vatansever gençler yetişmesine katkıda bulunmayı kendine misyon edinmiştir.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Demir Kapı Ekibi">
+        </div>
+      </div>
+    </section>
+
+    <!-- Değerlerimiz Section -->
+    <section class="container about-section">
+      <h2 class="section-title">Değerlerimiz</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <i class="fas fa-brain"></i>
+          <h3>Aklın ve Bilimin Işığı</h3>
+          <p>Her türlü dogmatik düşünceden uzak, akıl ve bilimin rehberliğinde içerikler üretiyoruz.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-feather-alt"></i>
+          <h3>Özgün İçerik</h3>
+          <p>Okuyucularımıza özgün, derinlemesine araştırılmış ve kaliteli içerikler sunmayı ilke edindik.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-users"></i>
+          <h3>Toplumsal Fayda</h3>
+          <p>Yayınlarımızla toplumsal farkındalık yaratmak ve topluma katkı sağlamak temel prensibimizdir.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-balance-scale"></i>
+          <h3>Tarafsızlık</h3>
+          <p>Her konuda tarafsız ve objektif bir bakış açısıyla habercilik yapmaya özen gösteriyoruz.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-book-open"></i>
+          <h3>Eğitim</h3>
+          <p>Gençlerin eğitimine ve kişisel gelişimine katkı sağlayacak içerikler üretiyoruz.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-flag"></i>
+          <h3>Milli Değerler</h3>
+          <p>Türk milletinin değerlerine sahip çıkan, vatansever bir nesil yetişmesine katkıda bulunuyoruz.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ekibimiz Section -->
+    <section class="container about-section">
+      <h2 class="section-title">Ekibimiz</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Editör">
+          </div>
+          <div class="team-info">
+            <h3>Ahmet Yılmaz</h3>
+            <div class="team-role">Genel Yayın Yönetmeni</div>
+            <p>15 yıllık gazetecilik deneyimiyle ekibimize liderlik ediyor.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Yazar">
+          </div>
+          <div class="team-info">
+            <h3>Zeynep Kaya</h3>
+            <div class="team-role">Kültür-Sanat Editörü</div>
+            <p>Sanat tarihi alanında uzmanlaşmış, deneyimli bir editör.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-member">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Yazar">
+          </div>
+          <div class="team-info">
+            <h3>Mehmet Demir</h3>
+            <div class="team-role">Teknoloji Editörü</div>
+            <p>Teknoloji dünyasındaki gelişmeleri yakından takip ediyor.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tarihçe Section -->
+    <section class="container about-section">
+      <h2 class="section-title">Tarihçemiz</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Ocak 2023</div>
+            <h3>Kuruluş</h3>
+            <p>Demir Kapı Dergisi, Genç Türkler Hareketi bünyesinde kuruldu.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Nisan 2023</div>
+            <h3>İlk Sayı</h3>
+            <p>İlk sayımız yayınlandı ve büyük beğeni topladı.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Ağustos 2023</div>
+            <h3>Web Sitesi</h3>
+            <p>Dijital yayın platformumuz hizmete girdi.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">Aralık 2023</div>
+            <h3>5. Sayı</h3>
+            <p>Beşinci sayımızla birlikte okuyucu sayımız 10.000'i aştı.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2024</div>
+            <h3>Yeni Hedefler</h3>
+            <p>Uluslararası arenada Türk gençliğinin sesi olma yolunda ilerliyoruz.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+      <div class="cta-section">
+        <h2>Bizimle Yolculuğa Çıkın</h2>
+        <p>Demir Kapı Dergisi'ne abone olarak Türk gençliğinin aydınlık geleceğine katkıda bulunun.</p>
+        <a href="index.html#newsletter" class="btn">Abone Ol</a>
+        <a href="contact.html" class="btn btn-outline">İletişime Geç</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Hızlı Erişim</h3>
+            <ul>
+              <li>
+                <a href="index.html"><i class="fas fa-home"></i> Ana Sayfa</a>
+              </li>
+              <li>
+                <a href="makaleler.html"
+                  ><i class="fas fa-newspaper"></i> Makaleler</a
+                >
+              </li>
+              <li>
+                <a href="yazarlar.html"><i class="fas fa-list"></i> Yazarlar</a>
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="fas fa-info-circle"></i> Hakkımızda</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-envelope"></i> İletişim</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Demir Kapı Dergisi</h3>
+            <p>
+              Türk gençliğinin düşünce dergisi. Kaliteli içerik ve derin
+              analizlerle Türk milletine hizmet.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.linkedin.com/company/demir-kapı-dergisi/"
+                target="_blank"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="https://x.com/DemirKapiDer" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/demirkapidergisi/"
+                target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.youtube.com/@gencgth" target="_blank"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a href="https://www.tiktok.com/@gencgth_81" target="_blank"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>İletişim</h3>
+            <ul>
+              <li><i class="fas fa-map-marker-alt"></i> Ankara, Türkiye</li>
+              <li><i class="fas fa-phone"></i> +90 XXX XXX XX XX</li>
+              <li><i class="fas fa-envelope"></i> info@demirkapi.com</li>
+              <li><i class="fas fa-clock"></i>TÜRK uyumaz</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://www.linkedin.com/in/emekhsıldır/"
+            ><p>&copy; 2025 Demir Kapı Dergisi. Tüm hakları saklıdır.</p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+      // Scroll ile navbar rengini değiştirme
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("main-header");
+        if (window.scrollY > 50) {
+          header.classList.remove("transparent");
+          header.classList.add("solid");
+        } else {
+          header.classList.remove("solid");
+          header.classList.add("transparent");
+        }
+      });
+
+      // Mobil menü işlevselliği
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-menu").classList.toggle("active");
+          this.querySelector("i").classList.toggle("fa-bars");
+          this.querySelector("i").classList.toggle("fa-times");
+        });
+
+      // Back to top butonu
+      const backToTopButton = document.querySelector(".back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("visible");
+        } else {
+          backToTopButton.classList.remove("visible");
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    </script>
+</body>
+</html>
